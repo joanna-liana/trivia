@@ -6,17 +6,18 @@ export class GameRunner {
     game.add("Pat");
     game.add("Sue");
 
-    let notAWinner;
+    let isGameOn: boolean;
+
     do {
 
       game.roll(Math.floor(Math.random() * 6) + 1);
 
       if (shouldContinueOnWrongAnswer()) {
-        notAWinner = game.wrongAnswer();
+        isGameOn = game.wrongAnswer();
       } else {
-        notAWinner = game.wasCorrectlyAnswered();
+        isGameOn = game.wasCorrectlyAnswered();
       }
 
-    } while (notAWinner);
+    } while (isGameOn);
   }
 }
