@@ -1,7 +1,7 @@
 import { Game } from './game';
 
 export class GameRunner {
-  public static main(game = new Game()): void {
+  public static main(game = new Game(), isWrongAnswer = () => Math.floor(Math.random() * 10) == 7): void {
     game.add("Chet");
     game.add("Pat");
     game.add("Sue");
@@ -11,7 +11,7 @@ export class GameRunner {
 
       game.roll(Math.floor(Math.random() * 6) + 1);
 
-      if (Math.floor(Math.random() * 10) == 7) {
+      if (isWrongAnswer()) {
         notAWinner = game.wrongAnswer();
       } else {
         notAWinner = game.wasCorrectlyAnswered();
