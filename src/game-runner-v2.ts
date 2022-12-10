@@ -1,8 +1,7 @@
 import { Game } from './game';
 
 export class GameRunner {
-  public static main(): void {
-    const game = new Game();
+  public static main(game = new Game()): void {
     game.add("Chet");
     game.add("Pat");
     game.add("Sue");
