@@ -74,34 +74,28 @@ export class Game implements AnyGame {
 
         console.log(this.currentPlayerName + " is getting out of the penalty box");
 
-        this.currentPlayerPlace = this.currentPlayerPlace + roll;
-
-        if (this.currentPlayerPlace > 11) {
-          this.currentPlayerPlace = this.currentPlayerPlace - 12;
-        }
-
-        console.log(this.currentPlayerName + "'s new location is " + this.currentPlayerPlace);
-        console.log("The category is " + this.currentCategory());
-
-        this.askQuestion();
+        this.proceedOnRoll(roll);
       } else {
         console.log(this.currentPlayerName + " is not getting out of the penalty box");
 
         this.isGettingOutOfPenaltyBox = false;
       }
     } else {
-
-      this.currentPlayerPlace = this.currentPlayerPlace + roll;
-
-      if (this.currentPlayerPlace > 11) {
-        this.currentPlayerPlace = this.currentPlayerPlace - 12;
-      }
-
-      console.log(this.currentPlayerName + "'s new location is " + this.currentPlayerPlace);
-      console.log("The category is " + this.currentCategory());
-
-      this.askQuestion();
+      this.proceedOnRoll(roll);
     }
+  }
+
+  private proceedOnRoll(roll: number) {
+    this.currentPlayerPlace = this.currentPlayerPlace + roll;
+
+    if (this.currentPlayerPlace > 11) {
+      this.currentPlayerPlace = this.currentPlayerPlace - 12;
+    }
+
+    console.log(this.currentPlayerName + "'s new location is " + this.currentPlayerPlace);
+    console.log("The category is " + this.currentCategory());
+
+    this.askQuestion();
   }
 
   private askQuestion(): void {
