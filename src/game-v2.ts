@@ -65,27 +65,33 @@ export class Game implements AnyGame {
         this.isGettingOutOfPenaltyBox = true;
 
         console.log(this.currentPlayerName + " is getting out of the penalty box");
+
         this.places[this.currentPlayerIndex] = this.places[this.currentPlayerIndex] + roll;
+
         if (this.places[this.currentPlayerIndex] > 11) {
           this.places[this.currentPlayerIndex] = this.places[this.currentPlayerIndex] - 12;
         }
 
         console.log(this.currentPlayerName + "'s new location is " + this.places[this.currentPlayerIndex]);
         console.log("The category is " + this.currentCategory());
+
         this.askQuestion();
       } else {
         console.log(this.currentPlayerName + " is not getting out of the penalty box");
+
         this.isGettingOutOfPenaltyBox = false;
       }
     } else {
 
       this.places[this.currentPlayerIndex] = this.places[this.currentPlayerIndex] + roll;
+
       if (this.places[this.currentPlayerIndex] > 11) {
         this.places[this.currentPlayerIndex] = this.places[this.currentPlayerIndex] - 12;
       }
 
       console.log(this.currentPlayerName + "'s new location is " + this.places[this.currentPlayerIndex]);
       console.log("The category is " + this.currentCategory());
+
       this.askQuestion();
     }
   }
@@ -130,11 +136,14 @@ export class Game implements AnyGame {
   public wrongAnswer(): boolean {
     console.log('Question was incorrectly answered');
     console.log(this.currentPlayerName + " was sent to the penalty box");
+
     this.inPenaltyBox[this.currentPlayerIndex] = true;
 
     this.currentPlayerIndex += 1;
+
     if (this.currentPlayerIndex == this.players.length)
       this.currentPlayerIndex = 0;
+
     return true;
   }
 
@@ -142,20 +151,26 @@ export class Game implements AnyGame {
     if (this.inPenaltyBox[this.currentPlayerIndex]) {
       if (this.isGettingOutOfPenaltyBox) {
         console.log('Answer was correct!!!!');
+
         this.purses[this.currentPlayerIndex] += 1;
+
         console.log(this.currentPlayerName + " now has " +
           this.purses[this.currentPlayerIndex] + " Gold Coins.");
 
         var winner = this.didPlayerWin();
+
         this.currentPlayerIndex += 1;
+
         if (this.currentPlayerIndex == this.players.length)
           this.currentPlayerIndex = 0;
 
         return winner;
       } else {
         this.currentPlayerIndex += 1;
+
         if (this.currentPlayerIndex == this.players.length)
           this.currentPlayerIndex = 0;
+
         return true;
       }
 
@@ -165,12 +180,14 @@ export class Game implements AnyGame {
       console.log("Answer was corrent!!!!");
 
       this.purses[this.currentPlayerIndex] += 1;
+
       console.log(this.currentPlayerName + " now has " +
         this.purses[this.currentPlayerIndex] + " Gold Coins.");
 
       var winner = this.didPlayerWin();
 
       this.currentPlayerIndex += 1;
+
       if (this.currentPlayerIndex == this.players.length)
         this.currentPlayerIndex = 0;
 
