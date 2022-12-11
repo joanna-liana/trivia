@@ -1,7 +1,18 @@
 import { Game } from './game';
 
+export interface AnyGame {
+  add(name: string): boolean;
+  roll(number: number): void;
+  wrongAnswer(): boolean;
+  wasCorrectlyAnswered(): boolean;
+}
+
 export class GameRunner {
-  public static main(game = new Game(), shouldContinueOnWrongAnswer = () => Math.floor(Math.random() * 10) == 7): void {
+  public static main(
+    game: AnyGame = new Game(),
+    shouldContinueOnWrongAnswer = () => Math.floor(Math.random() * 10) == 7,
+    getNumberToRoll = () => Math.floor(Math.random() * 6) + 1
+  ): void {
     game.add("Chet");
     game.add("Pat");
     game.add("Sue");
@@ -10,7 +21,7 @@ export class GameRunner {
 
     do {
 
-      game.roll(Math.floor(Math.random() * 6) + 1);
+      game.roll(getNumberToRoll());
 
       if (shouldContinueOnWrongAnswer()) {
         isGameOn = game.wrongAnswer();
