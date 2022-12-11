@@ -43,17 +43,17 @@ describe("Golden master", () => {
 
       GameRunner.main(undefined, shouldContinueOnWrongAnswer, getNumberToRoll);
 
-      const allLogs1 = combineLogs();
+      const allLogsOriginal = combineLogs();
 
       // and when
       generator = getGenerator(seed);
 
       GameRunner.main(new GameV2(), shouldContinueOnWrongAnswer, getNumberToRoll);
 
-      const allLogs2 = combineLogs()
+      const allLogsRefactored = combineLogs()
 
       // then
-      expect(allLogs1).to.equal(allLogs2);
+      expect(allLogsOriginal).to.equal(allLogsRefactored);
     }
   });
 });
