@@ -1,11 +1,12 @@
-import * as sinon from 'sinon';
 import { describe, it } from 'mocha';
+import * as sinon from 'sinon';
 import { GameRunner } from '../src/game-runner-v2';
 import { Game } from '../src/game';
 
-describe('The test environment', () => {
-  it("characterises the current behaviour - 1", () => {
+describe("Game runner", () => {
+  it("stops the game on a right answer", () => {
     const game = sinon.createStubInstance(Game);
+    game.wrongAnswer.returns(false);
     const shouldContinueOnWrongAnswer = () => true;
 
     GameRunner.main(game, shouldContinueOnWrongAnswer);
@@ -14,8 +15,9 @@ describe('The test environment', () => {
     sinon.assert.calledOnce(game.roll);
   })
 
-  it("characterises the current behaviour - 2", () => {
+  it("stops the game on a wrong answer", () => {
     const game = sinon.createStubInstance(Game);
+    game.wasCorrectlyAnswered.returns(false);
     const shouldContinueOnWrongAnswer = () => false;
 
     GameRunner.main(game, shouldContinueOnWrongAnswer);
