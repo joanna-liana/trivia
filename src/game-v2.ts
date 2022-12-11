@@ -73,14 +73,14 @@ export class Game implements AnyGame {
 
       if (this.isGettingOutOfPenaltyBox) {
         console.log(this.currentPlayerName + " is getting out of the penalty box");
-
-        this.proceedOnRoll(roll);
       } else {
         console.log(this.currentPlayerName + " is not getting out of the penalty box");
+
+        return;
       }
-    } else {
-      this.proceedOnRoll(roll);
     }
+
+    this.proceedOnRoll(roll);
   }
 
   private proceedOnRoll(roll: number) {
