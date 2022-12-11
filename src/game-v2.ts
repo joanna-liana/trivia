@@ -149,38 +149,31 @@ export class Game implements AnyGame {
       if (this.isGettingOutOfPenaltyBox) {
         console.log('Answer was correct!!!!');
 
-        this.purses[this.currentPlayerIndex] += 1;
-
-        console.log(this.currentPlayerName + " now has " +
-          this.purses[this.currentPlayerIndex] + " Gold Coins.");
-
-        var winner = this.didPlayerWin();
-
-        this.selectNextPlayer();
-
-        return winner;
+        return this.handleCorrectAnswer();
       } else {
         this.selectNextPlayer();
 
         return true;
       }
 
-
     } else {
-
       console.log("Answer was corrent!!!!");
 
-      this.purses[this.currentPlayerIndex] += 1;
-
-      console.log(this.currentPlayerName + " now has " +
-        this.purses[this.currentPlayerIndex] + " Gold Coins.");
-
-      var winner = this.didPlayerWin();
-
-      this.selectNextPlayer();
-
-      return winner;
+      return this.handleCorrectAnswer();
     }
+  }
+
+  private handleCorrectAnswer() {
+    this.purses[this.currentPlayerIndex] += 1;
+
+    console.log(this.currentPlayerName + " now has " +
+      this.purses[this.currentPlayerIndex] + " Gold Coins.");
+
+    var winner = this.didPlayerWin();
+
+    this.selectNextPlayer();
+
+    return winner;
   }
 
 
