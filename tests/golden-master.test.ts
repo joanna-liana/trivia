@@ -10,7 +10,7 @@ import { Game as GameV2 } from '../src/game-v2';
 describe("Golden master", () => {
   const NUMBER_OF_CHECKS = 100;
 
-  it("compares two outputs", () => {
+  it("compares the logs of two game implemetations", () => {
     // given
     let generator: seedrandom.PRNG;
 
