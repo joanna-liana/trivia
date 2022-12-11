@@ -147,10 +147,7 @@ export class Game implements AnyGame {
 
     this.inPenaltyBox[this.currentPlayerIndex] = true;
 
-    this.currentPlayerIndex += 1;
-
-    if (this.currentPlayerIndex == this.players.length)
-      this.currentPlayerIndex = 0;
+    this.selectNextPlayer();
 
     return true;
   }
@@ -167,17 +164,11 @@ export class Game implements AnyGame {
 
         var winner = this.didPlayerWin();
 
-        this.currentPlayerIndex += 1;
-
-        if (this.currentPlayerIndex == this.players.length)
-          this.currentPlayerIndex = 0;
+        this.selectNextPlayer();
 
         return winner;
       } else {
-        this.currentPlayerIndex += 1;
-
-        if (this.currentPlayerIndex == this.players.length)
-          this.currentPlayerIndex = 0;
+        this.selectNextPlayer();
 
         return true;
       }
@@ -194,13 +185,17 @@ export class Game implements AnyGame {
 
       var winner = this.didPlayerWin();
 
-      this.currentPlayerIndex += 1;
-
-      if (this.currentPlayerIndex == this.players.length)
-        this.currentPlayerIndex = 0;
+      this.selectNextPlayer();
 
       return winner;
     }
   }
 
+
+  private selectNextPlayer() {
+    this.currentPlayerIndex += 1;
+
+    if (this.currentPlayerIndex == this.players.length)
+      this.currentPlayerIndex = 0;
+  }
 }
