@@ -26,6 +26,14 @@ export class Game implements AnyGame {
     return this.players[this.currentPlayerIndex];
   }
 
+  private get currentPlayerPlace(): number {
+    return this.places[this.currentPlayerIndex];
+  }
+
+  private set currentPlayerPlace(newPlace: number) {
+    this.places[this.currentPlayerIndex] = newPlace;
+  }
+
   constructor() {
 
     for (let i = 0; i < 50; i++) {
@@ -66,13 +74,13 @@ export class Game implements AnyGame {
 
         console.log(this.currentPlayerName + " is getting out of the penalty box");
 
-        this.places[this.currentPlayerIndex] = this.places[this.currentPlayerIndex] + roll;
+        this.currentPlayerPlace = this.currentPlayerPlace + roll;
 
-        if (this.places[this.currentPlayerIndex] > 11) {
-          this.places[this.currentPlayerIndex] = this.places[this.currentPlayerIndex] - 12;
+        if (this.currentPlayerPlace > 11) {
+          this.currentPlayerPlace = this.currentPlayerPlace - 12;
         }
 
-        console.log(this.currentPlayerName + "'s new location is " + this.places[this.currentPlayerIndex]);
+        console.log(this.currentPlayerName + "'s new location is " + this.currentPlayerPlace);
         console.log("The category is " + this.currentCategory());
 
         this.askQuestion();
@@ -83,13 +91,13 @@ export class Game implements AnyGame {
       }
     } else {
 
-      this.places[this.currentPlayerIndex] = this.places[this.currentPlayerIndex] + roll;
+      this.currentPlayerPlace = this.currentPlayerPlace + roll;
 
-      if (this.places[this.currentPlayerIndex] > 11) {
-        this.places[this.currentPlayerIndex] = this.places[this.currentPlayerIndex] - 12;
+      if (this.currentPlayerPlace > 11) {
+        this.currentPlayerPlace = this.currentPlayerPlace - 12;
       }
 
-      console.log(this.currentPlayerName + "'s new location is " + this.places[this.currentPlayerIndex]);
+      console.log(this.currentPlayerName + "'s new location is " + this.currentPlayerPlace);
       console.log("The category is " + this.currentCategory());
 
       this.askQuestion();
@@ -108,23 +116,23 @@ export class Game implements AnyGame {
   }
 
   private currentCategory(): string {
-    if (this.places[this.currentPlayerIndex] == 0)
+    if (this.currentPlayerPlace == 0)
       return 'Pop';
-    if (this.places[this.currentPlayerIndex] == 4)
+    if (this.currentPlayerPlace == 4)
       return 'Pop';
-    if (this.places[this.currentPlayerIndex] == 8)
+    if (this.currentPlayerPlace == 8)
       return 'Pop';
-    if (this.places[this.currentPlayerIndex] == 1)
+    if (this.currentPlayerPlace == 1)
       return 'Science';
-    if (this.places[this.currentPlayerIndex] == 5)
+    if (this.currentPlayerPlace == 5)
       return 'Science';
-    if (this.places[this.currentPlayerIndex] == 9)
+    if (this.currentPlayerPlace == 9)
       return 'Science';
-    if (this.places[this.currentPlayerIndex] == 2)
+    if (this.currentPlayerPlace == 2)
       return 'Sports';
-    if (this.places[this.currentPlayerIndex] == 6)
+    if (this.currentPlayerPlace == 6)
       return 'Sports';
-    if (this.places[this.currentPlayerIndex] == 10)
+    if (this.currentPlayerPlace == 10)
       return 'Sports';
     return 'Rock';
   }
