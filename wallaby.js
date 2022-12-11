@@ -1,4 +1,4 @@
-module.exports = function () {
+module.exports = function (wallaby) {
   return {
     files: [
       'src/**/*.ts'
@@ -9,6 +9,12 @@ module.exports = function () {
     ],
 
     testFramework: 'mocha',
+
+    compilers: {
+      '**/*.ts': wallaby.compilers.typeScript({
+        "esModuleInterop": true
+      })
+    },
 
     env: {
       type: 'node'
