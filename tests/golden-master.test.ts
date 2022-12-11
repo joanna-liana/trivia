@@ -34,8 +34,8 @@ describe("Golden master", () => {
       return seedrandom(String(seed))
     }
 
-    const shouldContinueOnWrongAnswer = () => generator() % 2 === 0;
-    const getNumberToRoll = () => generator();
+    const shouldContinueOnWrongAnswer = () => !!Math.floor(generator() * 2);
+    const getNumberToRoll = () => Math.floor(generator() * 7);
 
     for (let seed = 0; seed < NUMBER_OF_CHECKS; seed += 1) {
       // when
