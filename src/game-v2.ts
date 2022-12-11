@@ -145,37 +145,33 @@ export class Game implements AnyGame {
   }
 
   public wasCorrectlyAnswered(): boolean {
-    if (this.inPenaltyBox[this.currentPlayerIndex]) {
-      if (this.isGettingOutOfPenaltyBox) {
-        console.log('Answer was correct!!!!');
+    if (this.inPenaltyBox[this.currentPlayerIndex] && !this.isGettingOutOfPenaltyBox) {
+      this.selectNextPlayer();
 
-        return this.handleCorrectAnswer();
-      } else {
-        this.selectNextPlayer();
-
-        return true;
-      }
-
-    } else {
-      console.log("Answer was corrent!!!!");
-
-      return this.handleCorrectAnswer();
+      return true;
     }
-  }
 
-  private handleCorrectAnswer() {
+    this.logCorrectAnswer();
+
     this.purses[this.currentPlayerIndex] += 1;
 
     console.log(this.currentPlayerName + " now has " +
       this.purses[this.currentPlayerIndex] + " Gold Coins.");
 
-    var winner = this.didPlayerWin();
+    var isWinner = this.didPlayerWin();
 
     this.selectNextPlayer();
 
-    return winner;
+    return isWinner;
   }
 
+  private logCorrectAnswer() {
+    if (this.inPenaltyBox[this.currentPlayerIndex]) {
+      console.log('Answer was correct!!!!');
+    } else {
+      console.log("Answer was corrent!!!!");
+    }
+  }
 
   private selectNextPlayer() {
     this.currentPlayerIndex += 1;
