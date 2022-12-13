@@ -7,12 +7,12 @@ type Opaque<A, B> = A & {
 export type PlayerName = Opaque<string, "PlayerName">;
 
 export class Player {
-  currentPlayerPlace: number = 0;
-  currentPlayerPurse: number = 0;
+  place: number = 0;
+  purse: number = 0;
 
-  isCurrentPlayerInPenaltyBox: boolean = false;
-  isCurrentPlayerGettingOutOfPenaltyBox: boolean = false;
+  isInPenaltyBox: boolean = false;
+  isGettingOutOfPenaltyBox: boolean = false;
 
-  constructor(public readonly currentPlayerName: PlayerName) {
+  constructor(public readonly name: PlayerName) {
   }
 }
