@@ -15,12 +15,13 @@ export class Game implements AnyGame {
   private purses: Array<number> = [];
   private inPenaltyBox: Array<boolean> = [];
   private currentPlayerIndex: number = 0;
-  private isCurrentPlayerGettingOutOfPenaltyBox: boolean = false;
 
   private popQuestions: Array<string> = [];
   private scienceQuestions: Array<string> = [];
   private sportsQuestions: Array<string> = [];
   private rockQuestions: Array<string> = [];
+
+  private isCurrentPlayerGettingOutOfPenaltyBox: boolean = false;
 
   private get currentPlayerName(): PlayerName {
     return this.players[this.currentPlayerIndex];
