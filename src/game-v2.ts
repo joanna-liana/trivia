@@ -15,7 +15,7 @@ export class Game implements AnyGame {
   private purses: Array<number> = [];
   private inPenaltyBox: Array<boolean> = [];
   private currentPlayerIndex: number = 0;
-  private isGettingOutOfPenaltyBox: boolean = false;
+  private isCurrentPlayerGettingOutOfPenaltyBox: boolean = false;
 
   private popQuestions: Array<string> = [];
   private scienceQuestions: Array<string> = [];
@@ -85,9 +85,9 @@ export class Game implements AnyGame {
     console.log("They have rolled a " + roll);
 
     if (this.isCurrentPlayerInPenaltyBox) {
-      this.isGettingOutOfPenaltyBox = roll % 2 != 0;
+      this.isCurrentPlayerGettingOutOfPenaltyBox = roll % 2 != 0;
 
-      if (this.isGettingOutOfPenaltyBox) {
+      if (this.isCurrentPlayerGettingOutOfPenaltyBox) {
         console.log(this.currentPlayerName + " is getting out of the penalty box");
       } else {
         console.log(this.currentPlayerName + " is not getting out of the penalty box");
@@ -161,7 +161,7 @@ export class Game implements AnyGame {
   }
 
   public wasCorrectlyAnswered(): boolean {
-    if (this.isCurrentPlayerInPenaltyBox && !this.isGettingOutOfPenaltyBox) {
+    if (this.isCurrentPlayerInPenaltyBox && !this.isCurrentPlayerGettingOutOfPenaltyBox) {
       this.selectNextPlayer();
 
       return true;
