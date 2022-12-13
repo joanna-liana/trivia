@@ -1,13 +1,5 @@
 import { AnyGame } from './game-runner-v2';
-import { Player } from './Player';
-
-declare const _type: unique symbol;
-
-type Opaque<A, B> = A & {
-  readonly [_type]: B
-}
-
-type PlayerName = Opaque<string, "PlayerName">;
+import { Player, PlayerName } from './Player';
 
 export class Game implements AnyGame {
 
@@ -26,7 +18,7 @@ export class Game implements AnyGame {
   private isCurrentPlayerGettingOutOfPenaltyBox: boolean = false;
 
   private get currentPlayerName(): PlayerName {
-    return this.players[this.currentPlayerIndex];
+    return this.playersV2[this.currentPlayerIndex].currentPlayerName;
   }
 
   private get currentPlayerPlace(): number {
