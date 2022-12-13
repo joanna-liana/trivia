@@ -10,12 +10,6 @@ module.exports = function (wallaby) {
 
     testFramework: 'mocha',
 
-    compilers: {
-      '**/*.ts': wallaby.compilers.typeScript({
-        "esModuleInterop": true
-      })
-    },
-
     env: {
       type: 'node'
     },
