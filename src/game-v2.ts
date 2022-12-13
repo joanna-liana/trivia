@@ -1,4 +1,5 @@
 import { AnyGame } from './game-runner-v2';
+import { Player } from './Player';
 
 declare const _type: unique symbol;
 
@@ -11,6 +12,7 @@ type PlayerName = Opaque<string, "PlayerName">;
 export class Game implements AnyGame {
 
   private players: Array<PlayerName> = [];
+  private playersV2: Array<Player> = [];
   private places: Array<number> = [];
   private purses: Array<number> = [];
   private inPenaltyBox: Array<boolean> = [];
@@ -66,6 +68,7 @@ export class Game implements AnyGame {
 
   public add(name: PlayerName): boolean {
     this.players.push(name);
+    this.playersV2.push(new Player(name));
     this.places[this.howManyPlayers()] = 0;
     this.purses[this.howManyPlayers()] = 0;
     this.inPenaltyBox[this.howManyPlayers()] = false;
