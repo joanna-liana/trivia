@@ -22,11 +22,34 @@ export class Game implements AnyGame {
   private rockQuestions: Array<string> = [];
 
   private isCurrentPlayerGettingOutOfPenaltyBox: boolean = false;
-  private currentPlayerName: PlayerName;
-  private currentPlayerPlace: number;
-  private currentPlayerPurse: number;
-  private isCurrentPlayerInPenaltyBox: boolean;
 
+  private get currentPlayerName(): PlayerName {
+    return this.players[this.currentPlayerIndex];
+  }
+
+  private get currentPlayerPlace(): number {
+    return this.places[this.currentPlayerIndex];
+  }
+
+  private set currentPlayerPlace(newPlace: number) {
+    this.places[this.currentPlayerIndex] = newPlace;
+  }
+
+  private get currentPlayerPurse(): number {
+    return this.purses[this.currentPlayerIndex];
+  }
+
+  private set currentPlayerPurse(purseState: number) {
+    this.purses[this.currentPlayerIndex] = purseState;
+  }
+
+  private get isCurrentPlayerInPenaltyBox(): boolean {
+    return this.inPenaltyBox[this.currentPlayerIndex];
+  }
+
+  private set isCurrentPlayerInPenaltyBox(isIn: boolean) {
+    this.inPenaltyBox[this.currentPlayerIndex] = isIn;
+  }
   constructor() {
 
     for (let i = 0; i < 50; i++) {
