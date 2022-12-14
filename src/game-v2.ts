@@ -5,7 +5,6 @@ export class Game implements AnyGame {
 
   private players: Array<PlayerName> = [];
   private playersV2: Array<Player> = [];
-  private inPenaltyBox: Array<boolean> = [];
   private currentPlayerIndex: number = 0;
 
   private popQuestions: Array<string> = [];
@@ -36,11 +35,11 @@ export class Game implements AnyGame {
   }
 
   private get isCurrentPlayerInPenaltyBox(): boolean {
-    return this.inPenaltyBox[this.currentPlayerIndex];
+    return this.playersV2[this.currentPlayerIndex].isInPenaltyBox;
   }
 
   private set isCurrentPlayerInPenaltyBox(isIn: boolean) {
-    this.inPenaltyBox[this.currentPlayerIndex] = isIn;
+    this.playersV2[this.currentPlayerIndex].isInPenaltyBox = isIn;
   }
   constructor() {
 
@@ -59,7 +58,6 @@ export class Game implements AnyGame {
   public add(name: PlayerName): boolean {
     this.players.push(name);
     this.playersV2.push(new Player(name));
-    this.inPenaltyBox[this.howManyPlayers() - 1] = false;
 
     console.log(name + " was added");
     console.log("They are player number " + this.players.length);
