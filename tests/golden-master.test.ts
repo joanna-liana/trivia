@@ -20,7 +20,7 @@ describe("Golden master", () => {
 
     function combineLogs() {
       const combinedLogs = silentLog.getCalls().reduce((allLogs, currentCall) => {
-        allLogs += currentCall.args[0];
+        allLogs += '\n' + currentCall.args[0];
 
         return allLogs;
       }, '');
