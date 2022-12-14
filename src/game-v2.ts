@@ -60,7 +60,7 @@ export class Game implements AnyGame {
   public add(name: PlayerName): boolean {
     this.players.push(name);
     this.playersV2.push(new Player(name));
-    this.places[this.howManyPlayers()] = 0;
+    this.places[this.howManyPlayers() - 1] = 0;
     this.inPenaltyBox[this.howManyPlayers()] = false;
 
     console.log(name + " was added");
