@@ -5,7 +5,6 @@ export class Game implements AnyGame {
 
   private players: Array<PlayerName> = [];
   private playersV2: Array<Player> = [];
-  private places: Array<number> = [];
   private inPenaltyBox: Array<boolean> = [];
   private currentPlayerIndex: number = 0;
 
@@ -21,11 +20,11 @@ export class Game implements AnyGame {
   }
 
   private get currentPlayerPlace(): number {
-    return this.places[this.currentPlayerIndex];
+    return this.playersV2[this.currentPlayerIndex].place;
   }
 
   private set currentPlayerPlace(newPlace: number) {
-    this.places[this.currentPlayerIndex] = newPlace;
+    this.playersV2[this.currentPlayerIndex].place = newPlace;
   }
 
   private get currentPlayerPurse(): number {
@@ -60,7 +59,6 @@ export class Game implements AnyGame {
   public add(name: PlayerName): boolean {
     this.players.push(name);
     this.playersV2.push(new Player(name));
-    this.places[this.howManyPlayers() - 1] = 0;
     this.inPenaltyBox[this.howManyPlayers() - 1] = false;
 
     console.log(name + " was added");
