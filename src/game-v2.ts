@@ -13,32 +13,34 @@ export class Game implements AnyGame {
 
   private isCurrentPlayerGettingOutOfPenaltyBox: boolean = false;
 
+  private currentPlayer = this.players[this.currentPlayerIndex];
+
   private get currentPlayerName(): PlayerName {
-    return this.players[this.currentPlayerIndex].name;
+    return this.currentPlayer.name;
   }
 
   private get currentPlayerPlace(): number {
-    return this.players[this.currentPlayerIndex].place;
+    return this.currentPlayer.place;
   }
 
   private set currentPlayerPlace(newPlace: number) {
-    this.players[this.currentPlayerIndex].place = newPlace;
+    this.currentPlayer.place = newPlace;
   }
 
   private get currentPlayerPurse(): number {
-    return this.players[this.currentPlayerIndex].purse
+    return this.currentPlayer.purse
   }
 
   private set currentPlayerPurse(purseState: number) {
-    this.players[this.currentPlayerIndex].purse = purseState
+    this.currentPlayer.purse = purseState
   }
 
   private get isCurrentPlayerInPenaltyBox(): boolean {
-    return this.players[this.currentPlayerIndex].isInPenaltyBox;
+    return this.currentPlayer.isInPenaltyBox;
   }
 
   private set isCurrentPlayerInPenaltyBox(isIn: boolean) {
-    this.players[this.currentPlayerIndex].isInPenaltyBox = isIn;
+    this.currentPlayer.isInPenaltyBox = isIn;
   }
   constructor() {
 
