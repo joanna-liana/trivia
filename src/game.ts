@@ -28,7 +28,7 @@ export class Game {
 
   public add(name: string): boolean {
     this.players.push(name);
-    this.places[this.howManyPlayers()] = 0;
+    this.places[this.howManyPlayers() - 1] = 0;
     this.purses[this.howManyPlayers() - 1] = 0;
     this.inPenaltyBox[this.howManyPlayers()] = false;
 
