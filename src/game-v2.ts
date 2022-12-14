@@ -3,7 +3,6 @@ import { Player, PlayerName } from './Player';
 
 export class Game implements AnyGame {
 
-  private players: Array<PlayerName> = [];
   private playersV2: Array<Player> = [];
   private currentPlayerIndex: number = 0;
 
@@ -56,7 +55,6 @@ export class Game implements AnyGame {
   }
 
   public add(name: PlayerName): boolean {
-    this.players.push(name);
     this.playersV2.push(new Player(name));
 
     console.log(name + " was added");
@@ -66,7 +64,7 @@ export class Game implements AnyGame {
   }
 
   private howManyPlayers(): number {
-    return this.players.length;
+    return this.playersV2.length;
   }
 
   public roll(roll: number) {
