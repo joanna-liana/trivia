@@ -30,7 +30,7 @@ export class Game {
     this.players.push(name);
     this.places[this.howManyPlayers() - 1] = 0;
     this.purses[this.howManyPlayers() - 1] = 0;
-    this.inPenaltyBox[this.howManyPlayers()] = false;
+    this.inPenaltyBox[this.howManyPlayers() - 1] = false;
 
     console.log(name + " was added");
     console.log("They are player number " + this.players.length);

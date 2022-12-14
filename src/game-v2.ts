@@ -61,7 +61,7 @@ export class Game implements AnyGame {
     this.players.push(name);
     this.playersV2.push(new Player(name));
     this.places[this.howManyPlayers() - 1] = 0;
-    this.inPenaltyBox[this.howManyPlayers()] = false;
+    this.inPenaltyBox[this.howManyPlayers() - 1] = false;
 
     console.log(name + " was added");
     console.log("They are player number " + this.players.length);
