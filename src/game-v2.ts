@@ -15,14 +15,6 @@ export class Game implements AnyGame {
 
   private currentPlayer = this.players[this.currentPlayerIndex];
 
-  private get currentPlayerPlace(): number {
-    return this.currentPlayer.place;
-  }
-
-  private set currentPlayerPlace(newPlace: number) {
-    this.currentPlayer.place = newPlace;
-  }
-
   private get currentPlayerPurse(): number {
     return this.currentPlayer.purse
   }
@@ -85,13 +77,13 @@ export class Game implements AnyGame {
   }
 
   private proceedOnRoll(roll: number) {
-    this.currentPlayerPlace = this.currentPlayerPlace + roll;
+    this.currentPlayer.place = this.currentPlayer.place + roll;
 
-    if (this.currentPlayerPlace > 11) {
-      this.currentPlayerPlace = this.currentPlayerPlace - 12;
+    if (this.currentPlayer.place > 11) {
+      this.currentPlayer.place = this.currentPlayer.place - 12;
     }
 
-    console.log(this.currentPlayer.name + "'s new location is " + this.currentPlayerPlace);
+    console.log(this.currentPlayer.name + "'s new location is " + this.currentPlayer.place);
     console.log("The category is " + this.currentCategory());
 
     this.askQuestion();
@@ -109,23 +101,23 @@ export class Game implements AnyGame {
   }
 
   private currentCategory(): string {
-    if (this.currentPlayerPlace == 0)
+    if (this.currentPlayer.place == 0)
       return 'Pop';
-    if (this.currentPlayerPlace == 4)
+    if (this.currentPlayer.place == 4)
       return 'Pop';
-    if (this.currentPlayerPlace == 8)
+    if (this.currentPlayer.place == 8)
       return 'Pop';
-    if (this.currentPlayerPlace == 1)
+    if (this.currentPlayer.place == 1)
       return 'Science';
-    if (this.currentPlayerPlace == 5)
+    if (this.currentPlayer.place == 5)
       return 'Science';
-    if (this.currentPlayerPlace == 9)
+    if (this.currentPlayer.place == 9)
       return 'Science';
-    if (this.currentPlayerPlace == 2)
+    if (this.currentPlayer.place == 2)
       return 'Sports';
-    if (this.currentPlayerPlace == 6)
+    if (this.currentPlayer.place == 6)
       return 'Sports';
-    if (this.currentPlayerPlace == 10)
+    if (this.currentPlayer.place == 10)
       return 'Sports';
     return 'Rock';
   }
