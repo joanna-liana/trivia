@@ -3,7 +3,7 @@ import { Player, PlayerName } from './Player';
 
 export class Game implements AnyGame {
 
-  private playersV2: Array<Player> = [];
+  private players: Array<Player> = [];
   private currentPlayerIndex: number = 0;
 
   private popQuestions: Array<string> = [];
@@ -14,31 +14,31 @@ export class Game implements AnyGame {
   private isCurrentPlayerGettingOutOfPenaltyBox: boolean = false;
 
   private get currentPlayerName(): PlayerName {
-    return this.playersV2[this.currentPlayerIndex].name;
+    return this.players[this.currentPlayerIndex].name;
   }
 
   private get currentPlayerPlace(): number {
-    return this.playersV2[this.currentPlayerIndex].place;
+    return this.players[this.currentPlayerIndex].place;
   }
 
   private set currentPlayerPlace(newPlace: number) {
-    this.playersV2[this.currentPlayerIndex].place = newPlace;
+    this.players[this.currentPlayerIndex].place = newPlace;
   }
 
   private get currentPlayerPurse(): number {
-    return this.playersV2[this.currentPlayerIndex].purse
+    return this.players[this.currentPlayerIndex].purse
   }
 
   private set currentPlayerPurse(purseState: number) {
-    this.playersV2[this.currentPlayerIndex].purse = purseState
+    this.players[this.currentPlayerIndex].purse = purseState
   }
 
   private get isCurrentPlayerInPenaltyBox(): boolean {
-    return this.playersV2[this.currentPlayerIndex].isInPenaltyBox;
+    return this.players[this.currentPlayerIndex].isInPenaltyBox;
   }
 
   private set isCurrentPlayerInPenaltyBox(isIn: boolean) {
-    this.playersV2[this.currentPlayerIndex].isInPenaltyBox = isIn;
+    this.players[this.currentPlayerIndex].isInPenaltyBox = isIn;
   }
   constructor() {
 
@@ -55,7 +55,7 @@ export class Game implements AnyGame {
   }
 
   public add(name: PlayerName): boolean {
-    this.playersV2.push(new Player(name));
+    this.players.push(new Player(name));
 
     console.log(name + " was added");
     console.log("They are player number " + this.howManyPlayers());
@@ -64,7 +64,7 @@ export class Game implements AnyGame {
   }
 
   private howManyPlayers(): number {
-    return this.playersV2.length;
+    return this.players.length;
   }
 
   public roll(roll: number) {
