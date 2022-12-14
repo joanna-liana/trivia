@@ -60,7 +60,7 @@ export class Game implements AnyGame {
     this.playersV2.push(new Player(name));
 
     console.log(name + " was added");
-    console.log("They are player number " + this.players.length);
+    console.log("They are player number " + this.howManyPlayers());
 
     return true;
   }
@@ -181,7 +181,7 @@ export class Game implements AnyGame {
   private selectNextPlayer() {
     this.currentPlayerIndex += 1;
 
-    if (this.currentPlayerIndex == this.players.length)
+    if (this.currentPlayerIndex == this.howManyPlayers())
       this.currentPlayerIndex = 0;
   }
 }
