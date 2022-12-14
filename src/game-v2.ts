@@ -6,7 +6,6 @@ export class Game implements AnyGame {
   private players: Array<PlayerName> = [];
   private playersV2: Array<Player> = [];
   private places: Array<number> = [];
-  private purses: Array<number> = [];
   private inPenaltyBox: Array<boolean> = [];
   private currentPlayerIndex: number = 0;
 
@@ -30,11 +29,11 @@ export class Game implements AnyGame {
   }
 
   private get currentPlayerPurse(): number {
-    return this.purses[this.currentPlayerIndex];
+    return this.playersV2[this.currentPlayerIndex].purse
   }
 
   private set currentPlayerPurse(purseState: number) {
-    this.purses[this.currentPlayerIndex] = purseState;
+    this.playersV2[this.currentPlayerIndex].purse = purseState
   }
 
   private get isCurrentPlayerInPenaltyBox(): boolean {
@@ -62,7 +61,6 @@ export class Game implements AnyGame {
     this.players.push(name);
     this.playersV2.push(new Player(name));
     this.places[this.howManyPlayers()] = 0;
-    this.purses[this.howManyPlayers()] = 0;
     this.inPenaltyBox[this.howManyPlayers()] = false;
 
     console.log(name + " was added");
