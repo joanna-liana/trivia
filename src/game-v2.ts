@@ -15,10 +15,6 @@ export class Game implements AnyGame {
 
   private currentPlayer = this.players[this.currentPlayerIndex];
 
-  private get currentPlayerName(): PlayerName {
-    return this.currentPlayer.name;
-  }
-
   private get currentPlayerPlace(): number {
     return this.currentPlayer.place;
   }
@@ -70,16 +66,16 @@ export class Game implements AnyGame {
   }
 
   public roll(roll: number) {
-    console.log(this.currentPlayerName + " is the current player");
+    console.log(this.currentPlayer.name + " is the current player");
     console.log("They have rolled a " + roll);
 
     if (this.isCurrentPlayerInPenaltyBox) {
       this.isCurrentPlayerGettingOutOfPenaltyBox = roll % 2 != 0;
 
       if (this.isCurrentPlayerGettingOutOfPenaltyBox) {
-        console.log(this.currentPlayerName + " is getting out of the penalty box");
+        console.log(this.currentPlayer.name + " is getting out of the penalty box");
       } else {
-        console.log(this.currentPlayerName + " is not getting out of the penalty box");
+        console.log(this.currentPlayer.name + " is not getting out of the penalty box");
 
         return;
       }
@@ -95,7 +91,7 @@ export class Game implements AnyGame {
       this.currentPlayerPlace = this.currentPlayerPlace - 12;
     }
 
-    console.log(this.currentPlayerName + "'s new location is " + this.currentPlayerPlace);
+    console.log(this.currentPlayer.name + "'s new location is " + this.currentPlayerPlace);
     console.log("The category is " + this.currentCategory());
 
     this.askQuestion();
@@ -140,7 +136,7 @@ export class Game implements AnyGame {
 
   public wrongAnswer(): boolean {
     console.log('Question was incorrectly answered');
-    console.log(this.currentPlayerName + " was sent to the penalty box");
+    console.log(this.currentPlayer.name + " was sent to the penalty box");
 
     this.isCurrentPlayerInPenaltyBox = true;
 
@@ -160,7 +156,7 @@ export class Game implements AnyGame {
 
     this.currentPlayerPurse += 1;
 
-    console.log(this.currentPlayerName + " now has " +
+    console.log(this.currentPlayer.name + " now has " +
       this.currentPlayerPurse + " Gold Coins.");
 
     var isWinner = this.didPlayerWin();
