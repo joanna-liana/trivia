@@ -28,24 +28,24 @@ export class Questions {
     return "Rock Question " + index;
   }
 
-  private currentCategory(randomNumber: number): string {
-    if (randomNumber == 0)
+  public currentCategory(magicNumber: number): string {
+    if (magicNumber == 0)
       return 'Pop';
-    if (randomNumber == 4)
+    if (magicNumber == 4)
       return 'Pop';
-    if (randomNumber == 8)
+    if (magicNumber == 8)
       return 'Pop';
-    if (randomNumber == 1)
+    if (magicNumber == 1)
       return 'Science';
-    if (randomNumber == 5)
+    if (magicNumber == 5)
       return 'Science';
-    if (randomNumber == 9)
+    if (magicNumber == 9)
       return 'Science';
-    if (randomNumber == 2)
+    if (magicNumber == 2)
       return 'Sports';
-    if (randomNumber == 6)
+    if (magicNumber == 6)
       return 'Sports';
-    if (randomNumber == 10)
+    if (magicNumber == 10)
       return 'Sports';
     return 'Rock';
   }

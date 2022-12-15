@@ -1,32 +1,15 @@
 import { AnyGame } from './game-runner-v2';
 import { Player, PlayerName } from './Player';
+import { Questions } from './Questions';
 
 export class Game implements AnyGame {
 
   private players: Array<Player> = [];
   private currentPlayerIndex: number = 0;
-
-  private popQuestions: Array<string> = [];
-  private scienceQuestions: Array<string> = [];
-  private sportsQuestions: Array<string> = [];
-  private rockQuestions: Array<string> = [];
+  private questions = new Questions();
 
   private get currentPlayer(): Player {
     return this.players[this.currentPlayerIndex];
-  }
-
-  constructor() {
-
-    for (let i = 0; i < 50; i++) {
-      this.popQuestions.push("Pop Question " + i);
-      this.scienceQuestions.push("Science Question " + i);
-      this.sportsQuestions.push("Sports Question " + i);
-      this.rockQuestions.push(this.createRockQuestion(i));
-    }
-  }
-
-  private createRockQuestion(index: number): string {
-    return "Rock Question " + index;
   }
 
   public add(name: PlayerName): boolean {
@@ -69,42 +52,9 @@ export class Game implements AnyGame {
     }
 
     console.log(this.currentPlayer.name + "'s new location is " + this.currentPlayer.place);
-    console.log("The category is " + this.currentCategory());
+    console.log("The category is " + this.questions.currentCategory(this.currentPlayer.place));
 
-    this.askQuestion();
-  }
-
-  private askQuestion(): void {
-    if (this.currentCategory() == 'Pop')
-      console.log(this.popQuestions.shift());
-    if (this.currentCategory() == 'Science')
-      console.log(this.scienceQuestions.shift());
-    if (this.currentCategory() == 'Sports')
-      console.log(this.sportsQuestions.shift());
-    if (this.currentCategory() == 'Rock')
-      console.log(this.rockQuestions.shift());
-  }
-
-  private currentCategory(): string {
-    if (this.currentPlayer.place == 0)
-      return 'Pop';
-    if (this.currentPlayer.place == 4)
-      return 'Pop';
-    if (this.currentPlayer.place == 8)
-      return 'Pop';
-    if (this.currentPlayer.place == 1)
-      return 'Science';
-    if (this.currentPlayer.place == 5)
-      return 'Science';
-    if (this.currentPlayer.place == 9)
-      return 'Science';
-    if (this.currentPlayer.place == 2)
-      return 'Sports';
-    if (this.currentPlayer.place == 6)
-      return 'Sports';
-    if (this.currentPlayer.place == 10)
-      return 'Sports';
-    return 'Rock';
+    this.questions.askQuestion(this.currentPlayer.place);
   }
 
   private didPlayerWin(): boolean {
