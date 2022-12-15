@@ -13,7 +13,9 @@ export class Game implements AnyGame {
 
   private isCurrentPlayerGettingOutOfPenaltyBox: boolean = false;
 
-  private currentPlayer = this.players[this.currentPlayerIndex];
+  private get currentPlayer(): Player {
+    return this.players[this.currentPlayerIndex];
+  }
 
   private get currentPlayerPurse(): number {
     return this.currentPlayer.purse
