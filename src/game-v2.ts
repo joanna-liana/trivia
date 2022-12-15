@@ -11,8 +11,6 @@ export class Game implements AnyGame {
   private sportsQuestions: Array<string> = [];
   private rockQuestions: Array<string> = [];
 
-  private isCurrentPlayerGettingOutOfPenaltyBox: boolean = false;
-
   private get currentPlayer(): Player {
     return this.players[this.currentPlayerIndex];
   }
@@ -49,9 +47,9 @@ export class Game implements AnyGame {
     console.log("They have rolled a " + roll);
 
     if (this.currentPlayer.isInPenaltyBox) {
-      this.isCurrentPlayerGettingOutOfPenaltyBox = roll % 2 != 0;
+      this.currentPlayer.isGettingOutOfPenaltyBox = roll % 2 != 0;
 
-      if (this.isCurrentPlayerGettingOutOfPenaltyBox) {
+      if (this.currentPlayer.isGettingOutOfPenaltyBox) {
         console.log(this.currentPlayer.name + " is getting out of the penalty box");
       } else {
         console.log(this.currentPlayer.name + " is not getting out of the penalty box");
@@ -125,7 +123,7 @@ export class Game implements AnyGame {
   }
 
   public wasCorrectlyAnswered(): boolean {
-    if (this.currentPlayer.isInPenaltyBox && !this.isCurrentPlayerGettingOutOfPenaltyBox) {
+    if (this.currentPlayer.isInPenaltyBox && !this.currentPlayer.isGettingOutOfPenaltyBox) {
       this.selectNextPlayer();
 
       return true;
