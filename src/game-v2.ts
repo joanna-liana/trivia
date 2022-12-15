@@ -17,14 +17,6 @@ export class Game implements AnyGame {
     return this.players[this.currentPlayerIndex];
   }
 
-  private get currentPlayerPurse(): number {
-    return this.currentPlayer.purse
-  }
-
-  private set currentPlayerPurse(purseState: number) {
-    this.currentPlayer.purse = purseState
-  }
-
   private get isCurrentPlayerInPenaltyBox(): boolean {
     return this.currentPlayer.isInPenaltyBox;
   }
@@ -125,7 +117,7 @@ export class Game implements AnyGame {
   }
 
   private didPlayerWin(): boolean {
-    return !(this.currentPlayerPurse == 6)
+    return !(this.currentPlayer.purse == 6)
   }
 
   public wrongAnswer(): boolean {
@@ -148,10 +140,10 @@ export class Game implements AnyGame {
 
     this.logCorrectAnswer();
 
-    this.currentPlayerPurse += 1;
+    this.currentPlayer.purse += 1;
 
     console.log(this.currentPlayer.name + " now has " +
-      this.currentPlayerPurse + " Gold Coins.");
+      this.currentPlayer.purse + " Gold Coins.");
 
     var isWinner = this.didPlayerWin();
 
