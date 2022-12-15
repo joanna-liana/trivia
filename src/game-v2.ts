@@ -17,13 +17,6 @@ export class Game implements AnyGame {
     return this.players[this.currentPlayerIndex];
   }
 
-  private get isCurrentPlayerInPenaltyBox(): boolean {
-    return this.currentPlayer.isInPenaltyBox;
-  }
-
-  private set isCurrentPlayerInPenaltyBox(isIn: boolean) {
-    this.currentPlayer.isInPenaltyBox = isIn;
-  }
   constructor() {
 
     for (let i = 0; i < 50; i++) {
@@ -55,7 +48,7 @@ export class Game implements AnyGame {
     console.log(this.currentPlayer.name + " is the current player");
     console.log("They have rolled a " + roll);
 
-    if (this.isCurrentPlayerInPenaltyBox) {
+    if (this.currentPlayer.isInPenaltyBox) {
       this.isCurrentPlayerGettingOutOfPenaltyBox = roll % 2 != 0;
 
       if (this.isCurrentPlayerGettingOutOfPenaltyBox) {
@@ -124,7 +117,7 @@ export class Game implements AnyGame {
     console.log('Question was incorrectly answered');
     console.log(this.currentPlayer.name + " was sent to the penalty box");
 
-    this.isCurrentPlayerInPenaltyBox = true;
+    this.currentPlayer.isInPenaltyBox = true;
 
     this.selectNextPlayer();
 
@@ -132,7 +125,7 @@ export class Game implements AnyGame {
   }
 
   public wasCorrectlyAnswered(): boolean {
-    if (this.isCurrentPlayerInPenaltyBox && !this.isCurrentPlayerGettingOutOfPenaltyBox) {
+    if (this.currentPlayer.isInPenaltyBox && !this.isCurrentPlayerGettingOutOfPenaltyBox) {
       this.selectNextPlayer();
 
       return true;
@@ -153,7 +146,7 @@ export class Game implements AnyGame {
   }
 
   private logCorrectAnswer() {
-    if (this.isCurrentPlayerInPenaltyBox) {
+    if (this.currentPlayer.isInPenaltyBox) {
       console.log('Answer was correct!!!!');
     } else {
       console.log("Answer was corrent!!!!");
