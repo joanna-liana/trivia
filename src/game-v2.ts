@@ -75,7 +75,7 @@ export class Game implements AnyGame {
       return true;
     }
 
-    this.logCorrectAnswer();
+    console.log('Answer was correct!!!!');
 
     this.currentPlayer.purse += 1;
 
@@ -87,13 +87,5 @@ export class Game implements AnyGame {
     this.players.selectNext();
 
     return isWinner;
-  }
-
-  private logCorrectAnswer() {
-    if (this.currentPlayer.isInPenaltyBox) {
-      console.log('Answer was correct!!!!');
-    } else {
-      console.log("Answer was corrent!!!!");
-    }
   }
 }
