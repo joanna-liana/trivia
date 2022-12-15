@@ -1,28 +1,24 @@
 import { AnyGame } from './game-runner-v2';
 import { Player, PlayerName } from './Player';
+import { Players } from './Players';
 import { Questions } from './Questions';
 
 export class Game implements AnyGame {
 
-  private players: Array<Player> = [];
-  private currentPlayerIndex: number = 0;
+  private players: Players = new Players();
   private questions = new Questions();
 
   private get currentPlayer(): Player {
-    return this.players[this.currentPlayerIndex];
+    return this.players.currentPlayer;
   }
 
   public add(name: PlayerName): boolean {
-    this.players.push(new Player(name));
+    this.players.add(name);
 
     console.log(name + " was added");
-    console.log("They are player number " + this.howManyPlayers());
+    console.log("They are player number " + this.players.howMany);
 
     return true;
-  }
-
-  private howManyPlayers(): number {
-    return this.players.length;
   }
 
   public roll(roll: number) {
@@ -67,14 +63,14 @@ export class Game implements AnyGame {
 
     this.currentPlayer.isInPenaltyBox = true;
 
-    this.selectNextPlayer();
+    this.players.selectNext();
 
     return true;
   }
 
   public wasCorrectlyAnswered(): boolean {
     if (this.currentPlayer.isInPenaltyBox && !this.currentPlayer.isGettingOutOfPenaltyBox) {
-      this.selectNextPlayer();
+      this.players.selectNext();
 
       return true;
     }
@@ -88,7 +84,7 @@ export class Game implements AnyGame {
 
     var isWinner = this.didPlayerWin();
 
-    this.selectNextPlayer();
+    this.players.selectNext();
 
     return isWinner;
   }
@@ -99,12 +95,5 @@ export class Game implements AnyGame {
     } else {
       console.log("Answer was corrent!!!!");
     }
-  }
-
-  private selectNextPlayer() {
-    this.currentPlayerIndex += 1;
-
-    if (this.currentPlayerIndex == this.howManyPlayers())
-      this.currentPlayerIndex = 0;
   }
 }
