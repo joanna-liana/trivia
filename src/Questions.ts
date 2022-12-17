@@ -20,21 +20,27 @@ export class Questions {
   }
 
   private chooseOne(magicNumber: number): string {
+    const currentCategoryQuestions = this.currentCategoryQuestions(magicNumber);
+
+    return currentCategoryQuestions.shift()!;
+  }
+
+  private currentCategoryQuestions(magicNumber: number): string[] {
     const category = this.currentCategory(magicNumber);
 
     if (category == 'Pop') {
-      return this.popQuestions.shift()!;
+      return this.popQuestions;
     }
 
     if (category == 'Science') {
-      return this.scienceQuestions.shift()!;
+      return this.scienceQuestions!;
     }
 
     if (category == 'Sports') {
-      return this.sportsQuestions.shift()!;
+      return this.sportsQuestions;
     }
 
-    return this.rockQuestions.shift()!;
+    return this.rockQuestions;
   }
 
   private createRockQuestion(index: number): string {
