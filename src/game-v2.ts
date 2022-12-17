@@ -3,6 +3,8 @@ import { Player, PlayerName } from './Player';
 import { Players } from './Players';
 import { Questions } from './Questions';
 
+type ShouldProceed = boolean;
+
 export class Game implements AnyGame {
 
   private players: Players = new Players();
@@ -25,21 +27,30 @@ export class Game implements AnyGame {
     console.log(this.currentPlayer.name + " is the current player");
     console.log("They have rolled a " + roll);
 
-    if (this.currentPlayer.isInPenaltyBox) {
-      const isGettingOutOfPenaltyBox = roll % 2 != 0;
+    const shouldProceed = this.handlePenaltyBox(roll);
 
-      if (isGettingOutOfPenaltyBox) {
-        console.log(this.currentPlayer.name + " is getting out of the penalty box");
-
-        this.currentPlayer.isInPenaltyBox = false;
-      } else {
-        console.log(this.currentPlayer.name + " is not getting out of the penalty box");
-
-        return;
-      }
+    if (!shouldProceed) {
+      return;
     }
 
     this.proceedOnRoll(roll);
+  }
+
+  private handlePenaltyBox(roll: number): ShouldProceed {
+    if (!this.currentPlayer.isInPenaltyBox) {
+      return true;
+    }
+
+    this.currentPlayer.isInPenaltyBox = roll % 2 === 0;
+
+    const notification = this.currentPlayer.isInPenaltyBox ?
+      "is not getting out of the penalty box" :
+      "is getting out of the penalty box";
+
+    console.log(`${this.currentPlayer.name} ${notification}`);
+
+    return !this.currentPlayer.isInPenaltyBox;
+
   }
 
   private proceedOnRoll(roll: number) {
