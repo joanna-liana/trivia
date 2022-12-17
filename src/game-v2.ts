@@ -69,7 +69,7 @@ export class Game implements AnyGame {
   }
 
   public wasCorrectlyAnswered(): boolean {
-    if (this.currentPlayer.isInPenaltyBox && !this.currentPlayer.isGettingOutOfPenaltyBox) {
+    if (this.currentPlayer.isInPenaltyBox) {
       this.players.selectNext();
 
       return true;
