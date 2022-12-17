@@ -63,10 +63,10 @@ export class Game implements AnyGame {
   }
 
   private movePlayer(roll: number) {
-    this.currentPlayer.place = this.currentPlayer.place + roll;
+    this.currentPlayer.place += roll;
 
     if (this.currentPlayer.place > 11) {
-      this.currentPlayer.place = this.currentPlayer.place - 12;
+      this.currentPlayer.place -= 12;
     }
   }
 
