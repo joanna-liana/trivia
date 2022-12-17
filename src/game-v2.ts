@@ -30,6 +30,8 @@ export class Game implements AnyGame {
 
       if (this.currentPlayer.isGettingOutOfPenaltyBox) {
         console.log(this.currentPlayer.name + " is getting out of the penalty box");
+
+        this.currentPlayer.isInPenaltyBox = false;
       } else {
         console.log(this.currentPlayer.name + " is not getting out of the penalty box");
 
