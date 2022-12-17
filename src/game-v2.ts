@@ -36,6 +36,25 @@ export class Game implements AnyGame {
     this.proceedOnRoll(roll);
   }
 
+  public wrongAnswer(): boolean {
+    console.log('Question was incorrectly answered');
+    console.log(this.currentPlayer.name + " was sent to the penalty box");
+
+    this.currentPlayer.isInPenaltyBox = true;
+
+    this.players.selectNext();
+
+    return true;
+  }
+
+  public wasCorrectlyAnswered(): boolean {
+    const isCorrect = this.handleCorrectAnswer();
+
+    this.players.selectNext();
+
+    return isCorrect;
+  }
+
   private handlePenaltyBox(roll: number): ShouldProceed {
     if (!this.currentPlayer.isInPenaltyBox) {
       return true;
@@ -68,25 +87,6 @@ export class Game implements AnyGame {
     if (this.currentPlayer.place > 11) {
       this.currentPlayer.place -= 12;
     }
-  }
-
-  public wrongAnswer(): boolean {
-    console.log('Question was incorrectly answered');
-    console.log(this.currentPlayer.name + " was sent to the penalty box");
-
-    this.currentPlayer.isInPenaltyBox = true;
-
-    this.players.selectNext();
-
-    return true;
-  }
-
-  public wasCorrectlyAnswered(): boolean {
-    const isCorrect = this.handleCorrectAnswer();
-
-    this.players.selectNext();
-
-    return isCorrect;
   }
 
   private handleCorrectAnswer(): boolean {
