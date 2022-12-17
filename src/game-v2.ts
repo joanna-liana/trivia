@@ -54,16 +54,20 @@ export class Game implements AnyGame {
   }
 
   private proceedOnRoll(roll: number) {
-    this.currentPlayer.place = this.currentPlayer.place + roll;
-
-    if (this.currentPlayer.place > 11) {
-      this.currentPlayer.place = this.currentPlayer.place - 12;
-    }
+    this.movePlayer(roll);
 
     console.log(this.currentPlayer.name + "'s new location is " + this.currentPlayer.place);
     console.log("The category is " + this.questions.currentCategory(this.currentPlayer.place));
 
     this.questions.askQuestion(this.currentPlayer.place);
+  }
+
+  private movePlayer(roll: number) {
+    this.currentPlayer.place = this.currentPlayer.place + roll;
+
+    if (this.currentPlayer.place > 11) {
+      this.currentPlayer.place = this.currentPlayer.place - 12;
+    }
   }
 
   private didPlayerWin(): boolean {
