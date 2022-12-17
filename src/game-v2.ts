@@ -26,9 +26,9 @@ export class Game implements AnyGame {
     console.log("They have rolled a " + roll);
 
     if (this.currentPlayer.isInPenaltyBox) {
-      this.currentPlayer.isGettingOutOfPenaltyBox = roll % 2 != 0;
+      const isGettingOutOfPenaltyBox = roll % 2 != 0;
 
-      if (this.currentPlayer.isGettingOutOfPenaltyBox) {
+      if (isGettingOutOfPenaltyBox) {
         console.log(this.currentPlayer.name + " is getting out of the penalty box");
 
         this.currentPlayer.isInPenaltyBox = false;

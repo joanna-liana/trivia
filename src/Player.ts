@@ -11,7 +11,6 @@ export class Player {
   purse: number = 0;
 
   isInPenaltyBox: boolean = false;
-  isGettingOutOfPenaltyBox: boolean = false;
 
   constructor(public readonly name: PlayerName) {
   }
