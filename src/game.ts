@@ -127,6 +127,7 @@ export class Game {
   public wasCorrectlyAnswered(): boolean {
     if (this.inPenaltyBox[this.currentPlayer]) {
       if (this.isGettingOutOfPenaltyBox) {
+        this.inPenaltyBox[this.currentPlayer] = false;
         console.log('Answer was correct!!!!');
         this.purses[this.currentPlayer] += 1;
         console.log(this.players[this.currentPlayer] + " now has " +
