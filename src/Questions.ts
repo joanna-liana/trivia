@@ -14,14 +14,27 @@ export class Questions {
   }
 
   public askOne(magicNumber: number): void {
-    if (this.currentCategory(magicNumber) == 'Pop')
-      console.log(this.popQuestions.shift());
-    if (this.currentCategory(magicNumber) == 'Science')
-      console.log(this.scienceQuestions.shift());
-    if (this.currentCategory(magicNumber) == 'Sports')
-      console.log(this.sportsQuestions.shift());
-    if (this.currentCategory(magicNumber) == 'Rock')
-      console.log(this.rockQuestions.shift());
+    const question = this.chooseOne(magicNumber);
+
+    console.log(question);
+  }
+
+  private chooseOne(magicNumber: number): string {
+    const category = this.currentCategory(magicNumber);
+
+    if (category == 'Pop') {
+      return this.popQuestions.shift()!;
+    }
+
+    if (category == 'Science') {
+      return this.scienceQuestions.shift()!;
+    }
+
+    if (category == 'Sports') {
+      return this.sportsQuestions.shift()!;
+    }
+
+    return this.rockQuestions.shift()!;
   }
 
   private createRockQuestion(index: number): string {
