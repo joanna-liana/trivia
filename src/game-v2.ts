@@ -77,8 +77,6 @@ export class Game implements AnyGame {
       return true;
     }
 
-    this.currentPlayer.isInPenaltyBox = false;
-
     console.log('Answer was correct!!!!');
 
     this.currentPlayer.purse += 1;
