@@ -59,7 +59,7 @@ export class Game implements AnyGame {
     console.log(this.currentPlayer.name + "'s new location is " + this.currentPlayer.place);
     console.log("The category is " + this.questions.currentCategory(this.currentPlayer.place));
 
-    this.questions.askQuestion(this.currentPlayer.place);
+    this.questions.askOne(this.currentPlayer.place);
   }
 
   private movePlayer(roll: number) {

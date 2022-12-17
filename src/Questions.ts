@@ -13,7 +13,7 @@ export class Questions {
     }
   }
 
-  public askQuestion(magicNumber: number): void {
+  public askOne(magicNumber: number): void {
     if (this.currentCategory(magicNumber) == 'Pop')
       console.log(this.popQuestions.shift());
     if (this.currentCategory(magicNumber) == 'Science')
