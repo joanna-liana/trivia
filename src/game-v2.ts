@@ -70,10 +70,6 @@ export class Game implements AnyGame {
     }
   }
 
-  private didPlayerWin(): boolean {
-    return !(this.currentPlayer.purse == 6)
-  }
-
   public wrongAnswer(): boolean {
     console.log('Question was incorrectly answered');
     console.log(this.currentPlayer.name + " was sent to the penalty box");
@@ -86,9 +82,15 @@ export class Game implements AnyGame {
   }
 
   public wasCorrectlyAnswered(): boolean {
-    if (this.currentPlayer.isInPenaltyBox) {
-      this.players.selectNext();
+    const isCorrect = this.handleCorrectAnswer();
 
+    this.players.selectNext();
+
+    return isCorrect;
+  }
+
+  private handleCorrectAnswer(): boolean {
+    if (this.currentPlayer.isInPenaltyBox) {
       return true;
     }
 
@@ -99,10 +101,6 @@ export class Game implements AnyGame {
     console.log(this.currentPlayer.name + " now has " +
       this.currentPlayer.purse + " Gold Coins.");
 
-    var isWinner = this.didPlayerWin();
-
-    this.players.selectNext();
-
-    return isWinner;
+    return !(this.currentPlayer.purse == 6);
   }
 }
