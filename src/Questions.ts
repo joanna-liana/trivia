@@ -29,24 +29,18 @@ export class Questions {
   }
 
   public currentCategory(magicNumber: number): string {
-    if (magicNumber == 0)
+    if ([0, 4, 8].includes(magicNumber)) {
       return 'Pop';
-    if (magicNumber == 4)
-      return 'Pop';
-    if (magicNumber == 8)
-      return 'Pop';
-    if (magicNumber == 1)
+    }
+
+    if ([1, 5, 9].includes(magicNumber)) {
       return 'Science';
-    if (magicNumber == 5)
-      return 'Science';
-    if (magicNumber == 9)
-      return 'Science';
-    if (magicNumber == 2)
+    }
+
+    if ([2, 6, 10].includes(magicNumber)) {
       return 'Sports';
-    if (magicNumber == 6)
-      return 'Sports';
-    if (magicNumber == 10)
-      return 'Sports';
+    }
+
     return 'Rock';
   }
 }
