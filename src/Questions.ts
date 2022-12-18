@@ -13,21 +13,11 @@ export class Questions {
     Sports: []
   }
 
-  private popQuestions: Array<string> = [];
-  private scienceQuestions: Array<string> = [];
-  private sportsQuestions: Array<string> = [];
-  private rockQuestions: Array<string> = [];
-
   constructor() {
     for (let i = 0; i < 50; i++) {
-      this.popQuestions.push(Category.POP + " Question " + i);
-      this.scienceQuestions.push(Category.SCIENCE + " Question " + i);
-      this.sportsQuestions.push(Category.SPORTS + " Question " + i);
-      this.rockQuestions.push(Category.ROCK + " Question " + i);
-
       Object.keys(this.questions).forEach((category) => {
         this.questions[category as Category].push(category + " Question " + i)
-      })
+      });
     }
   }
 
