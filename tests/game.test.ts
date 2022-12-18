@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import { Game } from '../src/game-v2';
+import { Game } from '../src/game';
 import { PlayerName } from '../src/Player';
 import { PlayerLimitReached } from '../src/errors/PlayerLimitReached';
 
