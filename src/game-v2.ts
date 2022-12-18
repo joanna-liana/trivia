@@ -73,20 +73,12 @@ export class Game implements AnyGame {
   }
 
   private proceedOnRoll(roll: number) {
-    this.movePlayer(roll);
+    this.currentPlayer.move(roll);
 
     console.log(this.currentPlayer.name + "'s new location is " + this.currentPlayer.place);
     console.log("The category is " + this.questions.currentCategory(this.currentPlayer.place));
 
     this.questions.askOne(this.currentPlayer.place);
-  }
-
-  private movePlayer(roll: number) {
-    this.currentPlayer.place += roll;
-
-    if (this.currentPlayer.place > 11) {
-      this.currentPlayer.place -= 12;
-    }
   }
 
   private handleCorrectAnswer(): boolean {

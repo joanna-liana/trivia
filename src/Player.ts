@@ -12,6 +12,14 @@ export class Player {
 
   isInPenaltyBox: boolean = false;
 
-  constructor(public readonly name: PlayerName) {
+  constructor(public readonly name: PlayerName, private readonly maxPlace = 12) {
+  }
+
+  move(places: number) {
+    this.place += places;
+
+    if (this.place >= this.maxPlace) {
+      this.place -= this.maxPlace;
+    }
   }
 }
