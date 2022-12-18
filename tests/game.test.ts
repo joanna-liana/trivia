@@ -15,7 +15,7 @@ describe("Game", () => {
 
     const game = new Game({ maxPlayers: MAX_PLAYERS });
 
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < MAX_PLAYERS; i++) {
       game.add(<PlayerName>`PLAYER ${i}`);
     }
 
