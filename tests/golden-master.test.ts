@@ -4,9 +4,9 @@ import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import sinon from 'sinon';
 
-import { AnyGame, GameRunner } from '../src/game-runner-v2';
-import { Game as GameV2 } from '../src/game-v2';
-import { Game } from '../src/game';
+import { AnyGame, GameRunner } from '../src/game-runner';
+import { Game as GameV2 } from '../src/game';
+import { Game } from '../src/legacy/game';
 
 describe("Golden master", () => {
   const NUMBER_OF_CHECKS = 10;

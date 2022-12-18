@@ -1,7 +1,7 @@
 import { describe, it } from 'mocha';
 import * as sinon from 'sinon';
-import { GameRunner } from '../src/game-runner-v2';
-import { Game } from '../src/game';
+import { GameRunner } from '../src/game-runner';
+import { Game } from '../src/legacy/game';
 
 describe("Game runner", () => {
   it("stops the game on a right answer", () => {
