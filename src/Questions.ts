@@ -25,7 +25,7 @@ export class Questions {
       this.sportsQuestions.push(Category.SPORTS + " Question " + i);
       this.rockQuestions.push(Category.ROCK + " Question " + i);
 
-      Object.keys(this.questions).forEach((category, i) => {
+      Object.keys(this.questions).forEach((category) => {
         this.questions[category as Category].push(category + " Question " + i)
       })
     }
@@ -46,22 +46,10 @@ export class Questions {
   private currentCategoryQuestions(magicNumber: number): string[] {
     const category = this.currentCategory(magicNumber);
 
-    if (category == Category.POP) {
-      return this.popQuestions;
-    }
-
-    if (category == Category.SCIENCE) {
-      return this.scienceQuestions!;
-    }
-
-    if (category == Category.SPORTS) {
-      return this.sportsQuestions;
-    }
-
-    return this.rockQuestions;
+    return this.questions[category];
   }
 
-  public currentCategory(magicNumber: number): string {
+  public currentCategory(magicNumber: number): Category {
     if ([0, 4, 8].includes(magicNumber)) {
       return Category.POP;
     }
