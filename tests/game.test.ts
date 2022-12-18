@@ -5,15 +5,25 @@ import { PlayerName } from '../src/Player';
 import { PlayerLimitReached } from '../src/errors/PlayerLimitReached';
 
 describe("Game", () => {
-  it("The maximum number of player can be limited", () => {
-    const MAX_PLAYERS = 6;
+  describe("The maximum number of players", () => {
+    it("can be limited", () => {
+      const MAX_PLAYERS = 6;
 
-    const game = new Game({ maxPlayers: MAX_PLAYERS });
+      const game = new Game({ maxPlayers: MAX_PLAYERS });
 
-    for (let i = 0; i < MAX_PLAYERS; i++) {
-      game.add(<PlayerName>`PLAYER ${i}`);
-    }
+      for (let i = 0; i < MAX_PLAYERS; i++) {
+        game.add(<PlayerName>`PLAYER ${i}`);
+      }
 
-    expect(() => game.add(<PlayerName>'EXTRA PLAYER')).to.throw(PlayerLimitReached)
+      expect(() => game.add(<PlayerName>'EXTRA PLAYER')).to.throw(PlayerLimitReached);
+    })
+
+    it("can be unlimited", () => {
+      const game = new Game();
+
+      for (let i = 0; i < 1000; i++) {
+        expect(() => game.add(<PlayerName>`PLAYER ${i}`)).not.to.throw();
+      }
+    })
   })
 });
