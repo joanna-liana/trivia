@@ -2,12 +2,7 @@ import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { Game } from '../src/game-v2';
 import { PlayerName } from '../src/Player';
-
-class PlayerLimitReached extends Error {
-  constructor() {
-    super('The maximum number of players has been reached')
-  }
-}
+import { PlayerLimitReached } from '../src/errors/PlayerLimitReached';
 
 describe("Game", () => {
   it("The maximum number of player can be limited", () => {
