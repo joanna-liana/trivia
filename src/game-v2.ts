@@ -5,13 +5,24 @@ import { Questions } from './Questions';
 
 type ShouldProceed = boolean;
 
+interface GameRules {
+  maxPlayers?: number;
+}
+
 export class Game implements AnyGame {
 
+  private rules: GameRules;
   private players: Players = new Players();
   private questions = new Questions();
 
   private get currentPlayer(): Player {
     return this.players.currentPlayer;
+  }
+
+  constructor(rules?: Partial<GameRules>) {
+    this.rules = {
+      ...rules,
+    }
   }
 
   public add(name: PlayerName): boolean {
