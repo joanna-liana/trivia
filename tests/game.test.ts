@@ -3,6 +3,12 @@ import { describe, it } from 'mocha';
 import { Game } from '../src/game-v2';
 import { PlayerName } from '../src/Player';
 
+class PlayerLimitReached extends Error {
+  constructor() {
+    super('The maximum number of players has been reached')
+  }
+}
+
 describe("Game", () => {
   it("The maximum number of player can be limited", () => {
     const MAX_PLAYERS = 6;
