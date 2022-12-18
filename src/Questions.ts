@@ -9,7 +9,7 @@ export class Questions {
       this.popQuestions.push("Pop Question " + i);
       this.scienceQuestions.push("Science Question " + i);
       this.sportsQuestions.push("Sports Question " + i);
-      this.rockQuestions.push(this.createRockQuestion(i));
+      this.rockQuestions.push("Rock Question " + i);
     }
   }
 
@@ -41,10 +41,6 @@ export class Questions {
     }
 
     return this.rockQuestions;
-  }
-
-  private createRockQuestion(index: number): string {
-    return "Rock Question " + index;
   }
 
   public currentCategory(magicNumber: number): string {
