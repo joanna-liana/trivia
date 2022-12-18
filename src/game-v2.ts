@@ -12,7 +12,7 @@ interface GameRules {
 export class Game implements AnyGame {
 
   private rules: GameRules;
-  private players: Players = new Players();
+  private players: Players;
   private questions = new Questions();
 
   private get currentPlayer(): Player {
@@ -22,7 +22,9 @@ export class Game implements AnyGame {
   constructor(rules?: Partial<GameRules>) {
     this.rules = {
       ...rules,
-    }
+    };
+
+    this.players = new Players(this.rules.maxPlayers);
   }
 
   public add(name: PlayerName): boolean {
