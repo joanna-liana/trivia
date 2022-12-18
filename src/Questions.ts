@@ -6,6 +6,13 @@ enum Category {
 }
 
 export class Questions {
+  private questions: Record<Category, Array<string>> = {
+    Pop: [],
+    Rock: [],
+    Science: [],
+    Sports: []
+  }
+
   private popQuestions: Array<string> = [];
   private scienceQuestions: Array<string> = [];
   private sportsQuestions: Array<string> = [];
@@ -17,6 +24,10 @@ export class Questions {
       this.scienceQuestions.push(Category.SCIENCE + " Question " + i);
       this.sportsQuestions.push(Category.SPORTS + " Question " + i);
       this.rockQuestions.push(Category.ROCK + " Question " + i);
+
+      Object.keys(this.questions).forEach((category, i) => {
+        this.questions[category as Category].push(category + " Question " + i)
+      })
     }
   }
 
