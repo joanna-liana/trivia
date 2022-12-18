@@ -1,7 +1,9 @@
-const POP = 'Pop';
-const SCIENCE = 'Science';
-const SPORTS = 'Sports';
-const ROCK = 'Rock';
+enum Category {
+  POP = 'Pop',
+  SCIENCE = 'Science',
+  SPORTS = 'Sports',
+  ROCK = 'Rock',
+}
 
 export class Questions {
   private popQuestions: Array<string> = [];
@@ -11,10 +13,10 @@ export class Questions {
 
   constructor() {
     for (let i = 0; i < 50; i++) {
-      this.popQuestions.push(POP + " Question " + i);
-      this.scienceQuestions.push(SCIENCE + " Question " + i);
-      this.sportsQuestions.push(SPORTS + " Question " + i);
-      this.rockQuestions.push(ROCK + " Question " + i);
+      this.popQuestions.push(Category.POP + " Question " + i);
+      this.scienceQuestions.push(Category.SCIENCE + " Question " + i);
+      this.sportsQuestions.push(Category.SPORTS + " Question " + i);
+      this.rockQuestions.push(Category.ROCK + " Question " + i);
     }
   }
 
@@ -33,15 +35,15 @@ export class Questions {
   private currentCategoryQuestions(magicNumber: number): string[] {
     const category = this.currentCategory(magicNumber);
 
-    if (category == POP) {
+    if (category == Category.POP) {
       return this.popQuestions;
     }
 
-    if (category == SCIENCE) {
+    if (category == Category.SCIENCE) {
       return this.scienceQuestions!;
     }
 
-    if (category == SPORTS) {
+    if (category == Category.SPORTS) {
       return this.sportsQuestions;
     }
 
@@ -50,17 +52,17 @@ export class Questions {
 
   public currentCategory(magicNumber: number): string {
     if ([0, 4, 8].includes(magicNumber)) {
-      return POP;
+      return Category.POP;
     }
 
     if ([1, 5, 9].includes(magicNumber)) {
-      return SCIENCE;
+      return Category.SCIENCE;
     }
 
     if ([2, 6, 10].includes(magicNumber)) {
-      return SPORTS;
+      return Category.SPORTS;
     }
 
-    return ROCK;
+    return Category.ROCK;
   }
 }
