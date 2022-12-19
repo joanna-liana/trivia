@@ -2,10 +2,6 @@ import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { Questions } from '../src/Questions';
 
-type RawCategory = string;
-
-type SelectCategoryRules = Record<RawCategory, (magicNumber: number) => boolean>;
-
 describe("Questions", () => {
   describe("Categories", () => {
     it("have a default set", () => {
