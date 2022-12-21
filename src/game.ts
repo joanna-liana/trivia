@@ -91,7 +91,13 @@ export class Game implements AnyGame {
     console.log(this.currentPlayer.name + "'s new location is " + this.currentPlayer.place);
     console.log("The category is " + this.questions.currentCategory(this.currentPlayer.place));
 
-    this.questions.askOne(this.currentPlayer.place);
+    this.askQuestion();
+  }
+
+  private askQuestion() {
+    const question = this.questions.chooseOne(this.currentPlayer.place);
+
+    console.log(question);
   }
 
   private handleCorrectAnswer(): boolean {
