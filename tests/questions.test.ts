@@ -16,7 +16,7 @@ describe("Questions", () => {
     it("can be extended", () => {
       const questions = new Questions({
         extraCategoryRules: {
-          Geography: (magicNumber) => [3, 7].includes(magicNumber)
+          Geography: (magicNumber: number) => [3, 7].includes(magicNumber)
         }
       });
 
