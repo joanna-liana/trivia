@@ -50,12 +50,6 @@ export class Questions {
     return currentCategoryQuestions.shift()!;
   }
 
-  private currentCategoryQuestions(magicNumber: number): string[] {
-    const category = this.currentCategory(magicNumber);
-
-    return this.questions[category];
-  }
-
   public currentCategory(magicNumber: number): ExtendedCategories {
     for (const entries of Object.entries(this.categorySelectionRules)) {
       const [category, shouldBeSelected] = entries;
@@ -66,5 +60,11 @@ export class Questions {
     }
 
     return this.DEFAULT_CATEGORY;
+  }
+
+  private currentCategoryQuestions(magicNumber: number): string[] {
+    const category = this.currentCategory(magicNumber);
+
+    return this.questions[category];
   }
 }
