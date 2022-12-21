@@ -1,5 +1,3 @@
-import { Logger } from './Logger';
-
 enum BaseCategory {
   POP = 'Pop',
   SCIENCE = 'Science',
@@ -13,7 +11,6 @@ type SelectCategoryRules = Record<ExtendedCategories, CategorySelector>;
 
 type Props = {
   extraCategoryRules?: SelectCategoryRules;
-  logger?: Logger
 };
 
 export class Questions {
@@ -32,11 +29,7 @@ export class Questions {
     Sports: []
   }
 
-  private logger: Logger;
-
-  constructor({ extraCategoryRules, logger }: Props = {}) {
-    this.logger = logger ?? console;
-
+  constructor({ extraCategoryRules }: Props = {}) {
     if (extraCategoryRules) {
       Object.entries(extraCategoryRules).forEach(([category, selectionRule]) => {
         this.categorySelectionRules[category as ExtendedCategories] = selectionRule;
@@ -54,7 +47,7 @@ export class Questions {
   public askOne(magicNumber: number): void {
     const question = this.chooseOne(magicNumber);
 
-    this.logger.log(question);
+    console.log(question);
   }
 
   public chooseOne(magicNumber: number): string {
