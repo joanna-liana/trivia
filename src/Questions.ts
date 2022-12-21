@@ -57,7 +57,7 @@ export class Questions {
     this.logger.log(question);
   }
 
-  private chooseOne(magicNumber: number): string {
+  public chooseOne(magicNumber: number): string {
     const currentCategoryQuestions = this.currentCategoryQuestions(magicNumber);
 
     return currentCategoryQuestions.shift()!;
