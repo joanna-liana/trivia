@@ -22,10 +22,10 @@ describe("Questions", () => {
     it("have a default set", () => {
       const questions = new Questions({ logger });
 
-      questions.askOne(0);
-      questions.askOne(1);
-      questions.askOne(2);
-      questions.askOne(3);
+      logger.loggedQuestions.push(questions.chooseOne(0));
+      logger.loggedQuestions.push(questions.chooseOne(1));
+      logger.loggedQuestions.push(questions.chooseOne(2));
+      logger.loggedQuestions.push(questions.chooseOne(3));
 
       expect(logger.loggedQuestions.join('')).to.equal(
         'Pop Question 0' +
@@ -43,11 +43,11 @@ describe("Questions", () => {
         logger
       });
 
-      questions.askOne(0);
-      questions.askOne(1);
-      questions.askOne(2);
-      questions.askOne(3);
-      questions.askOne(123);
+      logger.loggedQuestions.push(questions.chooseOne(0));
+      logger.loggedQuestions.push(questions.chooseOne(1));
+      logger.loggedQuestions.push(questions.chooseOne(2));
+      logger.loggedQuestions.push(questions.chooseOne(3));
+      logger.loggedQuestions.push(questions.chooseOne(123));
 
       expect(logger.loggedQuestions.join('')).to.equal(
         'Pop Question 0' +
