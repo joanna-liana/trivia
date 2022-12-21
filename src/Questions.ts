@@ -1,42 +1,52 @@
-enum Category {
+import { Logger } from './Logger';
+
+enum BaseCategory {
   POP = 'Pop',
   SCIENCE = 'Science',
   SPORTS = 'Sports',
   ROCK = 'Rock',
 }
 
-type RawCategory = string;
-type SelectCategoryRules = Record<RawCategory, (magicNumber: number) => boolean>;
+type ExtendedCategories = BaseCategory | string;
+type CategorySelector = (magicNumber: number) => boolean
+type SelectCategoryRules = Record<ExtendedCategories, CategorySelector>;
+
+type Props = {
+  extraCategoryRules?: SelectCategoryRules;
+  logger?: Logger
+};
 
 export class Questions {
-  private DEFAULT_CATEGORY = Category.ROCK;
+  private DEFAULT_CATEGORY = BaseCategory.ROCK;
 
   private categorySelectionRules: SelectCategoryRules = {
-    [Category.POP]: (magicNumber) => [0, 4, 8].includes(magicNumber),
-    [Category.SCIENCE]: (magicNumber) => [1, 5, 9].includes(magicNumber),
-    [Category.SPORTS]: (magicNumber) => [2, 6, 10].includes(magicNumber),
+    [BaseCategory.POP]: (magicNumber) => [0, 4, 8].includes(magicNumber),
+    [BaseCategory.SCIENCE]: (magicNumber) => [1, 5, 9].includes(magicNumber),
+    [BaseCategory.SPORTS]: (magicNumber) => [2, 6, 10].includes(magicNumber),
   }
 
-  private questions: Record<Category | string, Array<string>> = {
+  private questions: Record<string, string[]> = {
     Pop: [],
     Rock: [],
     Science: [],
-    // TODO: not all enum values are required
     Sports: []
   }
 
-  constructor({ extraCategoryRules }: { extraCategoryRules?: SelectCategoryRules } = {}) {
+  private logger: Logger;
+
+  constructor({ extraCategoryRules, logger }: Props = {}) {
+    this.logger = logger ?? console;
+
     if (extraCategoryRules) {
       Object.entries(extraCategoryRules).forEach(([category, selectionRule]) => {
-        this.questions[category] = [];
-        this.categorySelectionRules[category] = selectionRule;
+        this.categorySelectionRules[category as ExtendedCategories] = selectionRule;
+        this.questions[category as ExtendedCategories] = [];
       })
     }
 
-
     for (let i = 0; i < 50; i++) {
       Object.keys(this.questions).forEach((category) => {
-        this.questions[category as Category].push(category + " Question " + i)
+        this.questions[category as BaseCategory].push(category + " Question " + i)
       });
     }
   }
@@ -44,7 +54,7 @@ export class Questions {
   public askOne(magicNumber: number): void {
     const question = this.chooseOne(magicNumber);
 
-    console.log(question);
+    this.logger.log(question);
   }
 
   private chooseOne(magicNumber: number): string {
@@ -59,8 +69,7 @@ export class Questions {
     return this.questions[category];
   }
 
-  // TODO: use generic Category type if possible
-  public currentCategory(magicNumber: number): RawCategory {
+  public currentCategory(magicNumber: number): ExtendedCategories {
     for (const entries of Object.entries(this.categorySelectionRules)) {
       const [category, shouldBeSelected] = entries;
 
