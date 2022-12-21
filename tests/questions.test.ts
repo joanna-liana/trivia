@@ -1,30 +1,61 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { Questions } from '../src/Questions';
+import { Logger } from '../src/Logger';
 
 describe("Questions", () => {
   describe("Categories", () => {
-    it("have a default set", () => {
-      const questions = new Questions();
+    class TestLogger implements Logger {
+      loggedQuestions: string[] = [];
 
-      expect(questions.currentCategory(0)).to.equal("Pop");
-      expect(questions.currentCategory(1)).to.equal("Science");
-      expect(questions.currentCategory(2)).to.equal("Sports");
-      expect(questions.currentCategory(3)).to.equal("Rock");
+      log(message: string) {
+        this.loggedQuestions.push(message)
+      }
+    }
+
+    let logger: TestLogger;
+
+    beforeEach(() => {
+      logger = new TestLogger();
+    })
+
+    it("have a default set", () => {
+      const questions = new Questions({ logger });
+
+      questions.askOne(0);
+      questions.askOne(1);
+      questions.askOne(2);
+      questions.askOne(3);
+
+      expect(logger.loggedQuestions.join('')).to.equal(
+        'Pop Question 0' +
+        'Science Question 0' +
+        'Sports Question 0' +
+        'Rock Question 0'
+      );
     })
 
     it("can be extended", () => {
       const questions = new Questions({
         extraCategoryRules: {
           Geography: (magicNumber: number) => [3, 7].includes(magicNumber)
-        }
+        },
+        logger
       });
 
-      expect(questions.currentCategory(0)).to.equal("Pop");
-      expect(questions.currentCategory(1)).to.equal("Science");
-      expect(questions.currentCategory(2)).to.equal("Sports");
-      expect(questions.currentCategory(3)).to.equal("Geography");
-      expect(questions.currentCategory(123)).to.equal("Rock");
+      questions.askOne(0);
+      questions.askOne(1);
+      questions.askOne(2);
+      questions.askOne(3);
+      questions.askOne(123);
+
+      expect(logger.loggedQuestions.join('')).to.equal(
+        'Pop Question 0' +
+        'Science Question 0' +
+        'Sports Question 0' +
+        'Geography Question 0' +
+        'Rock Question 0'
+      );
     })
   })
 });
