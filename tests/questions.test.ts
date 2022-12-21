@@ -5,6 +5,8 @@ import { Logger } from '../src/Logger';
 
 describe("Questions", () => {
   describe("Categories", () => {
+    let selectedQuestions: string[];
+
     class TestLogger implements Logger {
       loggedQuestions: string[] = [];
 
@@ -17,17 +19,18 @@ describe("Questions", () => {
 
     beforeEach(() => {
       logger = new TestLogger();
+      selectedQuestions = [];
     })
 
     it("have a default set", () => {
       const questions = new Questions({ logger });
 
-      logger.loggedQuestions.push(questions.chooseOne(0));
-      logger.loggedQuestions.push(questions.chooseOne(1));
-      logger.loggedQuestions.push(questions.chooseOne(2));
-      logger.loggedQuestions.push(questions.chooseOne(3));
+      selectedQuestions.push(questions.chooseOne(0));
+      selectedQuestions.push(questions.chooseOne(1));
+      selectedQuestions.push(questions.chooseOne(2));
+      selectedQuestions.push(questions.chooseOne(3));
 
-      expect(logger.loggedQuestions.join('')).to.equal(
+      expect(selectedQuestions.join('')).to.equal(
         'Pop Question 0' +
         'Science Question 0' +
         'Sports Question 0' +
@@ -43,13 +46,13 @@ describe("Questions", () => {
         logger
       });
 
-      logger.loggedQuestions.push(questions.chooseOne(0));
-      logger.loggedQuestions.push(questions.chooseOne(1));
-      logger.loggedQuestions.push(questions.chooseOne(2));
-      logger.loggedQuestions.push(questions.chooseOne(3));
-      logger.loggedQuestions.push(questions.chooseOne(123));
+      selectedQuestions.push(questions.chooseOne(0));
+      selectedQuestions.push(questions.chooseOne(1));
+      selectedQuestions.push(questions.chooseOne(2));
+      selectedQuestions.push(questions.chooseOne(3));
+      selectedQuestions.push(questions.chooseOne(123));
 
-      expect(logger.loggedQuestions.join('')).to.equal(
+      expect(selectedQuestions.join('')).to.equal(
         'Pop Question 0' +
         'Science Question 0' +
         'Sports Question 0' +
