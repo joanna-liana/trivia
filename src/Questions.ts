@@ -44,12 +44,6 @@ export class Questions {
     }
   }
 
-  public askOne(magicNumber: number): void {
-    const question = this.chooseOne(magicNumber);
-
-    console.log(question);
-  }
-
   public chooseOne(magicNumber: number): string {
     const currentCategoryQuestions = this.currentCategoryQuestions(magicNumber);
 
