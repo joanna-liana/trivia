@@ -3,6 +3,7 @@ import { describe, it } from 'mocha';
 import { Game } from '../src/game';
 import { PlayerName } from '../src/Player';
 import { PlayerLimitReached } from '../src/errors/PlayerLimitReached';
+import { NotEnoughPlayers } from '../src/errors/NotEnoughPlayers';
 
 describe("Game", () => {
   describe("The maximum number of players", () => {
@@ -24,6 +25,44 @@ describe("Game", () => {
       for (let i = 0; i < 1000; i++) {
         expect(() => game.add(<PlayerName>`PLAYER ${i}`)).not.to.throw();
       }
+    })
+  })
+
+  describe("The required number of players", () => {
+    let game: Game;
+
+    beforeEach(() => {
+      game = new Game();
+    })
+
+    function beginGame() {
+      return game.roll(1);
+    }
+
+    function addPlayers(playerCount: number) {
+      for (let i = 0; i < playerCount; i++) {
+        game.add(<PlayerName>`PLAYER ${i}`);
+      }
+    }
+
+    describe("cannot be fewer than 2", () => {
+      [2, 3, 10].forEach(playerCount => {
+        it(`${playerCount}`, () => {
+          addPlayers(playerCount);
+
+          expect(() => beginGame()).to.throw(NotEnoughPlayers);
+        })
+      })
+    })
+
+    describe("can be 2 or more", () => {
+      [2, 3, 10].forEach(playerCount => {
+        it(`${playerCount}`, () => {
+          addPlayers(playerCount);
+
+          expect(() => beginGame()).not.to.throw(NotEnoughPlayers);
+        })
+      })
     })
   })
 });
