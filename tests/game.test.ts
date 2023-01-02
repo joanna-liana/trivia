@@ -46,7 +46,7 @@ describe("Game", () => {
     }
 
     describe("cannot be fewer than 2", () => {
-      [2, 3, 10].forEach(playerCount => {
+      [0, 1].forEach(playerCount => {
         it(`${playerCount}`, () => {
           addPlayers(playerCount);
 
