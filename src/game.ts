@@ -2,6 +2,7 @@ import { AnyGame } from './game-runner';
 import { Player, PlayerName } from './Player';
 import { Players } from './Players';
 import { Questions } from './Questions';
+import { NotEnoughPlayers } from './errors/NotEnoughPlayers';
 
 type ShouldProceed = boolean;
 
@@ -9,31 +10,15 @@ interface GameRules {
   maxPlayers?: number;
 }
 
-export class Game implements AnyGame {
-
-  private rules: GameRules;
-  private players: Players = new Players();
-  private questions = new Questions();
-
+export class GameInProgress {
   private get currentPlayer(): Player {
     return this.players.currentPlayer;
   }
 
-  constructor(rules?: Partial<GameRules>) {
-    this.rules = {
-      ...rules,
-    };
-
-    this.players = new Players(this.rules.maxPlayers);
-  }
-
-  public add(name: PlayerName): boolean {
-    this.players.add(name);
-
-    console.log(name + " was added");
-    console.log("They are player number " + this.players.howMany);
-
-    return true;
+  constructor(private players: Players, private questions: Questions = new Questions()) {
+    if (players.howMany < 2) {
+      throw new NotEnoughPlayers();
+    }
   }
 
   public roll(roll: number) {
@@ -113,5 +98,45 @@ export class Game implements AnyGame {
       this.currentPlayer.purse + " Gold Coins.");
 
     return !(this.currentPlayer.purse == 6);
+  }
+}
+
+export class Game implements AnyGame {
+
+  private gameInProgress?: GameInProgress;
+  private rules: GameRules;
+  private players: Players = new Players();
+
+  constructor(rules?: Partial<GameRules>) {
+    this.rules = {
+      ...rules,
+    };
+
+    this.players = new Players(this.rules.maxPlayers);
+  }
+
+  public add(name: PlayerName): boolean {
+    this.players.add(name);
+
+    console.log(name + " was added");
+    console.log("They are player number " + this.players.howMany);
+
+    return true;
+  }
+
+  public roll(roll: number) {
+    if (!this.gameInProgress) {
+      this.gameInProgress = new GameInProgress(this.players);
+    }
+
+    this.gameInProgress.roll(roll);
+  }
+
+  public wrongAnswer(): boolean {
+    return this.gameInProgress!.wrongAnswer();
+  }
+
+  public wasCorrectlyAnswered(): boolean {
+    return this.gameInProgress!.wasCorrectlyAnswered();
   }
 }
