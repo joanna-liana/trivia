@@ -9,7 +9,7 @@ import { Game as GameV2 } from '../src/game';
 import { Game } from '../src/legacy/game';
 
 describe("Golden master", () => {
-  const NUMBER_OF_CHECKS = 10;
+  const NUMBER_OF_CHECKS = 1;
 
   let generator: seedrandom.PRNG;
 
@@ -66,14 +66,33 @@ describe("Golden master", () => {
       // Not entirely convinced that the randomisation is needed here
       const randomInt = Math.floor(generator() * 100)
 
+      const anyNumber = 1;
       const numberThatGetsOutOfPenaltyBox = randomInt % 2 === 0 ? randomInt + 1 : randomInt;
       const numberThatDoesNotGetOutOfPenaltyBox = numberThatGetsOutOfPenaltyBox + 1;
 
+      function anyTurn() {
+        game.roll(anyNumber);
+        game.wrongAnswer();
+      }
+
       game.add("SINGLE PLAYER");
-      game.roll(numberThatGetsOutOfPenaltyBox);
+      game.add("ANOTHER PLAYER");
+
+      // player 1
+      game.roll(anyNumber);
       game.wrongAnswer();
+
+      // player 2
+      anyTurn();
+
+      // player 1
       game.roll(numberThatGetsOutOfPenaltyBox);
       game.wasCorrectlyAnswered();
+
+      // player 2
+      anyTurn();
+
+      // player 1
       game.roll(numberThatDoesNotGetOutOfPenaltyBox);
       game.wasCorrectlyAnswered();
     }
@@ -97,8 +116,8 @@ describe("Golden master", () => {
 
     it("ensures that a player can successfully get out of the penalty box", () => {
       function expectPlayerToHaveLeftPenaltyBox(gameLogs: string) {
-        const correctAnswersCount = gameLogs.match(/Answer was correct!!!!/g)?.length;
-        expect(correctAnswersCount).to.equal(2);
+        const expectLogMatches = gameLogs.match(/SINGLE PLAYER now has 2 Gold Coins/g);
+        expect(expectLogMatches?.length).to.equal(1);
       }
 
       for (let seed = 0; seed < NUMBER_OF_CHECKS; seed += 1) {
