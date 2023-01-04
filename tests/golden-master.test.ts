@@ -68,7 +68,6 @@ describe("Golden master", () => {
 
       const anyNumber = 1;
       const numberThatGetsOutOfPenaltyBox = randomInt % 2 === 0 ? randomInt + 1 : randomInt;
-      const numberThatDoesNotGetOutOfPenaltyBox = numberThatGetsOutOfPenaltyBox + 1;
 
       function anyTurn() {
         game.roll(anyNumber);
@@ -93,7 +92,7 @@ describe("Golden master", () => {
       anyTurn();
 
       // player 1
-      game.roll(numberThatDoesNotGetOutOfPenaltyBox);
+      game.roll(anyNumber);
       game.wasCorrectlyAnswered();
     }
 
@@ -116,8 +115,8 @@ describe("Golden master", () => {
 
     it("ensures that a player can successfully get out of the penalty box", () => {
       function expectPlayerToHaveLeftPenaltyBox(gameLogs: string) {
-        const expectLogMatches = gameLogs.match(/SINGLE PLAYER now has 2 Gold Coins/g);
-        expect(expectLogMatches?.length).to.equal(1);
+        const expectedLogMatches = gameLogs.match(/SINGLE PLAYER now has 2 Gold Coins/g);
+        expect(expectedLogMatches?.length).to.equal(1);
       }
 
       for (let seed = 0; seed < NUMBER_OF_CHECKS; seed += 1) {
